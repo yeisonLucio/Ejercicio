@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Peliculas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Sipnosis</th>
+                <th>Duracion</th>
+                <th>Genero</th>
+                <th>Calidad</th>
+                <th>Idioma</th>
+                <th>Fechalanzamiento</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pelicula in peliculas %}
+            <tr>
+                <td><a href="{{ path('pelicula_show', { 'id': pelicula.id }) }}">{{ pelicula.id }}</a></td>
+                <td>{{ pelicula.nombre }}</td>
+                <td>{{ pelicula.sinopsis }}</td>
+                <td>{{ pelicula.duracion }}</td>
+                <td>{{ pelicula.genero }}</td>
+                <td>{{ pelicula.calidad }}</td>
+                <td>{{ pelicula.idioma }}</td>
+                <td>{% if pelicula.fechaLanzamiento %}{{ pelicula.fechaLanzamiento|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('pelicula_show', { 'id': pelicula.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('pelicula_edit', { 'id': pelicula.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('pelicula_new') }}">Create a new pelicula</a>
+        </li>
+    </ul>
+{% endblock %}

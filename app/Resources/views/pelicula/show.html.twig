@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Pelicula</h1>
+
+    <table border="2">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pelicula.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ pelicula.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Sinopsis</th>
+                <td>{{ pelicula.sinopsis }}</td>
+            </tr>
+            <tr>
+                <th>Duraccion</th>
+                <td>{{ pelicula.duracion }}</td>
+            </tr>
+            <tr>
+                <th>Genero</th>
+                <td>{{ pelicula.genero }}</td>
+            </tr>
+            <tr>
+                <th>Calidad</th>
+                <td>{{ pelicula.calidad }}</td>
+            </tr>
+            <tr>
+                <th>Idioma</th>
+                <td>{{ pelicula.idioma }}</td>
+            </tr>
+            <tr>
+                <th>Fechalanzamiento</th>
+                <td>{% if pelicula.fechaLanzamiento %}{{ pelicula.fechaLanzamiento|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('pelicula_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('pelicula_edit', { 'id': pelicula.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
