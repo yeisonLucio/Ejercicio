@@ -3,12 +3,12 @@
 {% block body %}
     <h1>Pelicula creation</h1>
 
-    {{ form_start(form, {'attr': {'id': 'form_pelicula'}}) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-        <input type="submit" value="data" />
-    {{ form_end(form, {'render_rest': false}) }}
-
+    <form>
+      <input id="nombre" type="text"/>
+      <input id="guardar" type="submit"/>
+    </form>
+    <br>
+    <h4>datos traidos</h4>
     <ul>
         <li>
             <a href="{{ path('pelicula_index') }}">Back to the list</a>

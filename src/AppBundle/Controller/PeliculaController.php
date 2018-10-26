@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Pelicula controller.
@@ -37,42 +38,27 @@ class PeliculaController extends Controller
      * Creates a new pelicula entity.
      *
      * @Route("/new", name="pelicula_new")
-     * @Method({"GET", "POST"})
+     * @Method({"POST"})
      */
     public function newAction(Request $request){
+      $number="";
+      if($request->isXmlHttpRequest()){
 
-        $pelicula = new Pelicula();
-        $form = $this->createForm('AppBundle\Form\PeliculaType', $pelicula);
+        $number= $request->request->get('nombre');
 
-      $form->handleRequest($request);
+        $response = new Response($number);
 
-        $status="";
-        if ($form->isValid()) {
-          var_dump($form); exit();
+        return $response;
+      }
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($pelicula);
-
-            try {
-              $em->flush();
-
-              $status = "Datos guardados";
-            } catch (\Exception $e) {
-              $status = $e->getmMessage();
-
-            }
-
-            return new JsonResponse(array('id' => $pelicula->getId(), 'status' => $status));
-        }else{
-      return $this->render('pelicula/new.html.twig',
-           array ('pelicula' => $pelicula, 'form' => $form->createView()));
+      return $this->render('pelicula/new.html.twig');
         }
 
         /*return new  JsonResponse(array('status' => $status, 'form' => $this->render('pelicula/new.html.twig',
          array ('pelicula' => $pelicula, 'form' => $form->createView()))));*/
 
 
-    }
+
 
     /**
      * Finds and displays a pelicula entity.

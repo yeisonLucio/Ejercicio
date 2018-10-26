@@ -1,5 +1,11 @@
 $(function(){
 
+  $("#guardar").on("click",function(event){
+      event.preventDefault();
+     guardarPelicula();
+   });
+
+
 });
 
 
@@ -34,11 +40,11 @@ function guardarPelicula(){
    }*/
     //capturando los datos del formulario
 
-      var nombre=$('#appbundle_pelicula_nombre').val();
-      var duracion= $('#appbundle_pelicula_duracion').val();
-      var genero= $('#appbundle_pelicula_genero').val();
-      var calidad= $('#appbundle_pelicula_calidad').val();
-      var idioma= $('#appbundle_pelicula_idioma').val();
+      var nombre=$('#nombre').val();
+      //var duracion= $('#appbundle_pelicula_duracion').val();
+      //var genero= $('#appbundle_pelicula_genero').val();
+      //var calidad= $('#appbundle_pelicula_calidad').val();
+     //var idioma= $('#appbundle_pelicula_idioma').val();
       //var Fechalanzamiento= $('#appbundle_pelicula_Fechalanzamiento').val();
 
 
@@ -47,22 +53,19 @@ function guardarPelicula(){
               +idioma);*/
       $.ajax({
        type: "POST",
-       url: "{{ (path('new')) }}",
+       url: "/pelicula/new",
        data:	{
            nombre:nombre,
-           duracion:duracion,
-           genero:genero,
-           calidad:calidad,
-           idioma:idioma
+
 
        },
        dataType: 'text',
        beforeSend: function(data) {
-           //alert("data enviada..."+data);
+           //console.log("data enviada..."+data);
 
        },
        success: function(data){
-           alert("data :"+data);
+          console.log("data :"+data);
            if(data){
 
 
